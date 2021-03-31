@@ -1,10 +1,15 @@
 package com.acme.dbo.txlog.iteration03;
 
+import com.acme.dbo.txlog.Facade;
 import com.acme.dbo.txlog.SysoutCaptureAndAssertionAbility;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
+
+import static com.acme.dbo.txlog.Facade.flush;
+import static java.lang.System.lineSeparator;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -20,8 +25,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-    /*
-    TODO: implement Logger solution to match specification as tests
+
+  //  TODO: implement Logger solution to match specification as tests
 
     @Test
     public void shouldLogIntegersArray() throws IOException {
@@ -31,8 +36,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
-        );
+            "primitives array: {-1, 0, 1}" + lineSeparator());
         //endregion
     }
 
@@ -44,15 +48,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertSysoutEquals(
-            "primitives matrix: {\n" +
-                "{-1, 0, 1}\n" +
-                "{1, 2, 3}\n" +
-                "{-1, -2, -3}\n" +
-            "}\n"
-        );
+            "primitives matrix: {" + lineSeparator() +
+                "{-1, 0, 1}" + lineSeparator() +
+                "{1, 2, 3}" + lineSeparator() +
+                "{-1, -2, -3}" + lineSeparator() +
+            "}" + lineSeparator());
+
         //endregion
     }
 
+    /*
     @Test
     public void shouldLogIntegersMulitidimentionalArray() throws IOException {
         //region when
@@ -69,6 +74,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
+    */
 
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
@@ -99,15 +105,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log("str");
         Facade.log(Integer.MAX_VALUE - 10);
         Facade.log(11);
+        flush();
         //endregion
 
         //region then
-        assertSysoutContains(1);
+        assertSysoutContains("1");
         assertSysoutContains("str");
-        assertSysoutContains(Integer.MAX_VALUE - 10);
-        assertSysoutContains(11);
+        assertSysoutContains(Integer.MAX_VALUE - 10 + lineSeparator());
+        assertSysoutContains("11");
         //endregion
     }
 
-    */
+
 }

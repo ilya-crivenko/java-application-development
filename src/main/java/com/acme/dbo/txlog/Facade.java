@@ -1,32 +1,25 @@
 package com.acme.dbo.txlog;
 
-public class Facade {
-/*
-    public static void log(Object object) {
-        outputToConsole(decorate(object));
-    }
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
-    private static String decorate (Object message) {
-        String prefix = "reference: ";
-         if ((message instanceof Integer) || (message instanceof Byte) || (message instanceof Boolean)) {
-            prefix = "primitive: ";
-        } else if (message instanceof String) {
-            prefix = "string: ";
-        } else if (message instanceof Character) {
-            prefix = "char: ";
-        }
-         return prefix + message;
-     }
-*/
+import java.util.PrimitiveIterator;
+
+import static java.lang.System.lineSeparator;
+
+public class Facade {
 
     private static final String PRIMITIVE_PREFIX = "primitive: ";
     private static final String CHAR_PREFIX = "char: ";
     private static final String STRING_PREFIX = "string: ";
     private static final String OBJECT_PREFIX = "reference: ";
+    private static final String ARRAY_PREFIX = "primitives array: {";
+    private static final String MATRIX_PREFIX = "primitives matrix: {";
     private static final String PRIMITIVE_POSTFIX = "";
     private static final String CHAR_POSTFIX = "";
     private static final String STRING_POSTFIX = "";
     private static final String OBJECT_POSTFIX = "";
+    private static final String ARRAY_POSTFIX = "}";
+    private static final String MATRIX_POSTFIX = "}";
     private static Integer intAccumulated = null;
     private static Integer byteAccumulated = null;
     private static String stringAccumulated = null;
@@ -52,6 +45,7 @@ public class Facade {
 
     public static void log(String message) {
         if (stringAccumulated == null) {
+            flush();
             stringAccumulated = message;
         } else {
             if (!stringAccumulated.equals(message)) {
@@ -60,6 +54,58 @@ public class Facade {
             }
         }
         stringDuplicatedCounter++;
+    }
+
+    public static void log(int[] message) {
+        String temp = "";
+        for (int i = 0; i < message.length; i++) {
+            if (i < message.length - 1) {
+                temp = temp + message[i] + ", ";
+            } else {
+                temp = temp + message[i];
+            }
+        }
+        outputToConsole(decorate(ARRAY_PREFIX, temp, ARRAY_POSTFIX));
+        }
+
+    public static void log(int[][] message) {
+        String temp = lineSeparator();
+        for (int i = 0; i < message.length; i++) {
+            temp = temp + "{";
+            for (int j = 0; j < message.length; j++) {
+                if (j < message.length - 1) {
+                    temp = temp + message[i][j] + ", ";
+                } else {
+                    temp = temp + message[i][j] + "}";
+                }
+            }
+            temp = temp + lineSeparator();
+        }
+        outputToConsole(decorate(MATRIX_PREFIX, temp, MATRIX_POSTFIX));
+    }
+
+    public static void log(String... message) {
+        String temp = "";
+        for (int i = 0; i < message.length; i++){
+            if (i < message.length - 1) {
+                temp = temp + message[i] + "\n";
+            } else {
+                temp = temp + message[i];
+            }
+        }
+        outputToConsole(decorate(STRING_PREFIX, temp, STRING_POSTFIX));
+    }
+
+    public static void log(Integer... message) {
+        String temp = "";
+        for (int i = 0; i < message.length; i++){
+            if (i < message.length - 1) {
+                temp = temp + message[i] + "\n";
+            } else {
+                temp = temp + message[i];
+            }
+        }
+        outputToConsole(decorate(PRIMITIVE_PREFIX, temp, PRIMITIVE_POSTFIX));
     }
 
     public static void log(Boolean message) {
@@ -106,7 +152,6 @@ public class Facade {
                 }
             }
         }
-        //stringAccumulated = null;
         byteAccumulated = null;
         intAccumulated = null;
         stringDuplicatedCounter = 0;
