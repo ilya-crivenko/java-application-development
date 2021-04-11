@@ -1,4 +1,6 @@
+/*
 package com.acme.dbo.txlog.iteration03;
+
 
 import com.acme.dbo.txlog.Facade;
 import com.acme.dbo.txlog.SysoutCaptureAndAssertionAbility;
@@ -8,7 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static com.acme.dbo.txlog.Facade.flush;
+//import static com.acme.dbo.txlog.Facade.flush;
 import static java.lang.System.lineSeparator;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
@@ -75,7 +77,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
     */
-
+/*
     @Test
     public void shouldLogStringsWithOneMethodCall() throws IOException {
         //region when
@@ -118,3 +120,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
 }
+ */

@@ -1,5 +1,48 @@
 package com.acme.dbo.txlog;
 
+import com.acme.dbo.txlog.logger.LoggerController;
+import com.acme.dbo.txlog.message.CharMessage;
+import com.acme.dbo.txlog.printer.ConsolePrinter;
+import com.acme.dbo.txlog.message.ByteMessage;
+import com.acme.dbo.txlog.message.IntMessage;
+import com.acme.dbo.txlog.message.StringMessage;
+
+/**
+ * 1. print to console
+ * 2. decorating
+ * 3. accumulating
+ * 4. --type overflow checking--
+ * 5. state management (flushing)
+
+ */
+
+public class Facade {
+    private static LoggerController controller = new LoggerController(new ConsolePrinter());
+
+    public static void log(int message){
+        controller.log(new IntMessage(message));
+    }
+
+    public static void log(String message){
+        controller.log(new StringMessage(message));
+    }
+
+    public static void log (Byte message){
+        controller.log(new ByteMessage(message));
+    }
+
+    public static void log (char message){
+        controller.log(new CharMessage(message));
+    }
+}
+
+
+
+
+
+/*
+package com.acme.dbo.txlog;
+
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
 import java.util.PrimitiveIterator;
@@ -156,4 +199,5 @@ public class Facade {
         intAccumulated = null;
         stringDuplicatedCounter = 0;
     }
-}
+    }
+ */

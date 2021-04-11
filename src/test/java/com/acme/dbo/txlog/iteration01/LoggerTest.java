@@ -30,11 +30,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogInteger() throws IOException {
         //region when
         Facade.log(1);
-        Facade.flush();
+        //Facade.flush();
         Facade.log(0);
-        Facade.flush();
+        //Facade.flush();
         Facade.log(-1);
-        Facade.flush();
+        //Facade.flush();
         //endregion
 
         //region then
@@ -43,15 +43,16 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+
     @Test
     public void shouldLogByte() throws IOException {
         //region when
         Facade.log((byte)1);
-        Facade.flush();
+        //Facade.flush();
         Facade.log((byte)0);
-        Facade.flush();
+        //Facade.flush();
         Facade.log((byte)-1);
-        Facade.flush();
+        //Facade.flush();
         //endregion
 
         //region then
@@ -69,7 +70,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogChar() throws IOException {
         //region when
         Facade.log('a');
-        Facade.flush();
+        //Facade.flush();
         Facade.log('b');
         //endregion
 
@@ -84,9 +85,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void shouldLogString() throws IOException {
         //region when
         Facade.log("test string 1");
-        Facade.flush();
+        //Facade.flush();
         Facade.log("other str");
-        Facade.flush();
+        //Facade.flush();
         //endregion
 
         //region then
@@ -95,7 +96,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("other str");
         //endregion
     }
-
+/*
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
@@ -122,5 +123,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("@");
         //endregion
     }
+     */
 
 }
+
