@@ -1,4 +1,9 @@
-package ooadrefactoring;
+package ooadrefactoring.logger;
+
+import ooadrefactoring.printer.ConsolePrinter;
+import ooadrefactoring.message.ByteMessage;
+import ooadrefactoring.message.IntMessage;
+import ooadrefactoring.message.StringMessage;
 
 public class LoggerController {
     private final ConsolePrinter consolePrinter;

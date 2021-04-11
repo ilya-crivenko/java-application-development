@@ -1,4 +1,4 @@
-package ooadrefactoring;
+package ooadrefactoring.printer;
 
 public class ConsolePrinter {
 }

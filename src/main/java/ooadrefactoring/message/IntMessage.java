@@ -1,4 +1,4 @@
-package ooadrefactoring;
+package ooadrefactoring.message;
 
 public class IntMessage {
     private final int body;
