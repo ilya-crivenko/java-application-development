@@ -1,5 +1,13 @@
 package ooaddemo;
 
+import ooaddemo.controller.LoggerController;
+import ooaddemo.domain.SeverityLevel;
+import ooaddemo.filter.SeverityMessageFilter;
+import ooaddemo.message.StringMessage;
+import ooaddemo.printer.FilePrinter;
+
+import java.sql.Connection;
+
 /**
  * Application builder
  */
@@ -10,6 +18,7 @@ public class ApplicationFramework {
                 new FilePrinter("log.txt"), // -> config.xml
                 new SeverityMessageFilter(SeverityLevel.WARNING) // -> config.xml
         );
+
         //endregion
 
         //region Request Cycle
@@ -21,5 +30,6 @@ public class ApplicationFramework {
         }
          */
         //endregion
+        loggerController.log(new StringMessage("message"), SeverityLevel.ERROR);
     }
 }
