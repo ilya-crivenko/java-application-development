@@ -1,24 +1,24 @@
 package com.acme.dbo.txlog.message;
 
-public class IntMessage implements Message{
-    private final int body;
+public class ObjectMessage implements Message{
+    private final Object body;
 
-    public IntMessage(int body) {
+    public ObjectMessage(Object body) {
         this.body = body;
     }
 
     @Override
     public String getDecoratedMessage() {
-        return "primitive: " + body;
+        return "reference: " + body;
     }
 
     @Override
     public boolean isSameTypeOf(Message newMessage) {
-        return newMessage instanceof IntMessage;
+        return newMessage instanceof ObjectMessage;
     }
 
     @Override
     public Message accumulate(Message newMessage) {
-        return new IntMessage(this.body + ((IntMessage)newMessage).body);
+        return null;
     }
 }

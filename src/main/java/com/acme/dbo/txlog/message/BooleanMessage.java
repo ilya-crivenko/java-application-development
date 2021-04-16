@@ -1,9 +1,9 @@
 package com.acme.dbo.txlog.message;
 
-public class IntMessage implements Message{
-    private final int body;
+public class BooleanMessage implements Message{
+    private final boolean body;
 
-    public IntMessage(int body) {
+    public BooleanMessage(boolean body) {
         this.body = body;
     }
 
@@ -14,11 +14,11 @@ public class IntMessage implements Message{
 
     @Override
     public boolean isSameTypeOf(Message newMessage) {
-        return newMessage instanceof IntMessage;
+        return newMessage instanceof BooleanMessage;
     }
 
     @Override
     public Message accumulate(Message newMessage) {
-        return new IntMessage(this.body + ((IntMessage)newMessage).body);
+        return null;
     }
 }

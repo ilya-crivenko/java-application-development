@@ -1,11 +1,9 @@
 package com.acme.dbo.txlog;
 
 import com.acme.dbo.txlog.logger.LoggerController;
-import com.acme.dbo.txlog.message.CharMessage;
+import com.acme.dbo.txlog.message.*;
 import com.acme.dbo.txlog.printer.ConsolePrinter;
-import com.acme.dbo.txlog.message.ByteMessage;
-import com.acme.dbo.txlog.message.IntMessage;
-import com.acme.dbo.txlog.message.StringMessage;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * 1. print to console
@@ -33,6 +31,18 @@ public class Facade {
 
     public static void log (char message){
         controller.log(new CharMessage(message));
+    }
+
+    public static void log (boolean message){
+        controller.log(new BooleanMessage(message));
+    }
+
+    public static void log (Object message){
+        controller.log(new ObjectMessage(message));
+    }
+
+    public static void flush() {
+        controller.flush();
     }
 }
 
