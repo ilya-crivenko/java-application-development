@@ -12,6 +12,7 @@ public class LoggerController {
     public void log(Message message) {
         if (this.currentState.isSameTypeOf(message)) {
             currentState = currentState.accumulate(message);
+            //if () //print
         } else {
             flush();
             currentState = message;

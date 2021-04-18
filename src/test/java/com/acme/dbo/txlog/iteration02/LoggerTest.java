@@ -36,7 +36,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log(2);
         Facade.log("str 2");
         Facade.log(0);
-        //Facade.flush();
+        Facade.flush();
         //endregion
 
         //region then
@@ -69,6 +69,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+
+
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
@@ -89,6 +91,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
 
+
+
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
@@ -100,7 +104,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Facade.log("str 3");
         Facade.log("str 3");
         Facade.log("str 3");
-        //Facade.flush();
+        Facade.flush();
         //endregion
 
         //region then
@@ -111,6 +115,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("str 3 (x3)" + lineSeparator());
         //endregion
     }
-
-
 }
+

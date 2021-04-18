@@ -1,6 +1,6 @@
 package com.acme.dbo.txlog.message;
 
-public class ByteMessage implements Message{
+public class ByteMessage implements Message {
     private final byte body;
 
     public ByteMessage(byte body) {
@@ -19,6 +19,12 @@ public class ByteMessage implements Message{
 
     @Override
     public Message accumulate(Message newMessage) {
-        return new ByteMessage((byte) (this.body + ((ByteMessage)newMessage).body));
+        int sumOfAccumulate = this.body + ((ByteMessage) newMessage).body;
+        if (sumOfAccumulate > Byte.MAX_VALUE) {
+            System.out.println(this.getDecoratedMessage());
+            return new ByteMessage(Byte.MAX_VALUE);
+        } else {
+            return new ByteMessage((byte) (this.body + ((ByteMessage) newMessage).body));
+        }
     }
 }

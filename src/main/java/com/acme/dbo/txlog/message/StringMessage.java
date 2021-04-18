@@ -2,7 +2,7 @@ package com.acme.dbo.txlog.message;
 
 public class StringMessage implements Message{
     private final String body;
-    private static int count =1;
+    private static int count = 1;
 
     public StringMessage(String body) {
         this.body = body;
@@ -12,7 +12,7 @@ public class StringMessage implements Message{
     public String getDecoratedMessage() {
         String decoratedBody;
         if (count > 1) {
-            decoratedBody = "string" + body + " (x" + count + ")";
+            decoratedBody = "string: " + body + " (x" + count + ")";
             count = 1;
         } else decoratedBody = "string: " + body;
         return decoratedBody;
@@ -25,7 +25,16 @@ public class StringMessage implements Message{
 
     @Override
     public Message accumulate(Message newMessage) {
-        count ++;
+        StringMessage newStringMessage = (StringMessage) newMessage;
+        if (this.stringIsSame(newStringMessage)) {
+            count++;
+        } else {
+            System.out.println(this.getDecoratedMessage());
+        }
         return newMessage;
+    }
+
+    private boolean stringIsSame (StringMessage stringMessage){
+        return this.body.equals(stringMessage.body);
     }
 }
